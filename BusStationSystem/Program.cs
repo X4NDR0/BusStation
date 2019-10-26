@@ -1,5 +1,4 @@
-﻿using System;
-namespace BusStationSystem.Services
+﻿namespace BusStationSystem.Services
 {
     class Program
     {
