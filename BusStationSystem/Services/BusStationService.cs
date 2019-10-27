@@ -6,12 +6,18 @@ using System.Linq;
 
 namespace BusStationSystem.Services
 {
+    /// <summary>
+    /// Service used to manipulate the bus station data.
+    /// </summary>
     public class BusStationService
     {
-        public static List<TransportationCompany> transportationCompanyList = new List<TransportationCompany>();
-        public static List<Autobus> autobusList = new List<Autobus>();
+        private static List<TransportationCompany> transportationCompanyList = new List<TransportationCompany>();
+        private static List<Autobus> autobusList = new List<Autobus>();
         Menu options;
 
+        /// <summary>
+        /// Used to run service
+        /// </summary>
         public void Initialize()
         {
             LoadData();
@@ -34,7 +40,6 @@ namespace BusStationSystem.Services
                         Console.WriteLine("Pogresan unos!");
                         break;
                 }
-
             } while (options != Menu.exit);
         }
 
@@ -63,20 +68,22 @@ namespace BusStationSystem.Services
             {
                 case 1:
                     Console.Clear();
-                    WriteAllCarriers();
+                    WriteAllTransportaionCompany();
                     break;
 
                 case 2:
                     Console.Clear();
-                    EditCarrier();
+                    EditTransportaionCompany();
                     break;
 
                 case 3:
-
+                    Console.Clear();
+                    RemoveTransportaionCompany();
                     break;
 
                 case 4:
-
+                    Console.Clear();
+                    AddTransportaionCompany();
                     break;
 
                 default:
@@ -84,8 +91,7 @@ namespace BusStationSystem.Services
             }
         }
 
-
-        private void WriteAllCarriers()
+        private void WriteAllTransportaionCompany()
         {
             foreach (TransportationCompany transportationCompany in transportationCompanyList)
             {
@@ -93,57 +99,95 @@ namespace BusStationSystem.Services
             }
         }
 
-        private void EditCarrier()
+        private void EditTransportaionCompany()
         {
-            Console.WriteLine("Please enter carrier ID:");
-            Int32.TryParse(Console.ReadLine(),out int selectID);
+            TipAutobusa tipa;
+            Console.Write("Please enter carrier ID:");
+            Int32.TryParse(Console.ReadLine(), out int selectID);
 
             TransportationCompany CheckID = transportationCompanyList.Where(x => x.TransportationCompanyID == selectID).First();
 
             if (CheckID != null)
             {
-                Console.WriteLine("Enter new ID of the carrier:");
-                Int32.TryParse(Console.ReadLine(),out int newID);
+                Console.Write("Enter new ID of the carrier:");
+                Int32.TryParse(Console.ReadLine(), out int newID);
 
-                Console.WriteLine("Enter new name and lastname of the carrier:");
+                Console.Write("Enter new name and lastname of the carrier:");
                 string newName = Console.ReadLine();
 
-                Console.WriteLine("Enter new place:");
+                Console.Write("Enter new place:");
                 string newPlace = Console.ReadLine();
 
                 WriteAllAutobuses();
                 Console.Write("Enter ID of the autobus:");
-                Int32.TryParse(Console.ReadLine(),out int autobusID);
+                Int32.TryParse(Console.ReadLine(), out int autobusID);
 
+                Console.WriteLine("Enter type of the autobus:");
+                Console.WriteLine("1.Jednospratni");
+                Console.WriteLine("2.Dvospratni");
+                Console.WriteLine("3.Mini bus");
+                Console.Write("Unos:");
 
-                Console.Write("Enter type of the autobus:");
-                string type = Console.ReadLine();
+                if (Enum.TryParse("Jednospratni", out tipa) == false)
+                {
 
-                AutobusType autobusTypeEdit = new AutobusType {AutobusID = autobusID,TypeName = type};
-                Autobus autobusEdit = new Autobus { AutobusRegNumber = autobusID,AutobusType = autobusTypeEdit};
-
-                TransportationCompany transportationCompanyEdit = new TransportationCompany {TransportationCompanyID = newID,TransportationCompanyName = newName,Autobus = autobusEdit,TransportationCompanyPlace = newPlace};
-
+                }
+                AutobusType autobusTypeEdit = new AutobusType { AutobusID = autobusID, TypeName = tipa.ToString() };
+                Autobus autobusEdit = new Autobus { AutobusRegNumber = autobusID, AutobusType = autobusTypeEdit };
+                TransportationCompany transportationCompanyEdit = new TransportationCompany { TransportationCompanyID = newID, TransportationCompanyName = newName, Autobus = autobusEdit, TransportationCompanyPlace = newPlace };
                 int indexFindedTC = transportationCompanyList.IndexOf(CheckID);
-
                 transportationCompanyList[indexFindedTC] = transportationCompanyEdit;
-
-            }else
+            }
+            else
             {
                 Console.WriteLine("This ID does not exits!");
             }
         }
 
+        private void RemoveTransportaionCompany()
+        {
+            Console.Write("Enter the ID of the TC you want to delete:");
+            Int32.TryParse(Console.ReadLine(),out int deleteID);
+
+            TransportationCompany DeleteID = transportationCompanyList.Where(x => x.TransportationCompanyID == deleteID).First();
+
+            if (DeleteID != null)
+            {
+                transportationCompanyList.Remove(DeleteID);
+                Console.WriteLine("You successfully deleted transportation company");
+            }else
+            {
+                Console.WriteLine("That ID does not exits!");
+            }
+        }
+
+        private void AddTransportaionCompany()
+        {
+            Console.Write("Enter a new ID:");
+            Int32.TryParse(Console.ReadLine(),out int addID);
+
+            TransportationCompany addTransportationCompany = transportationCompanyList.Where(x => x.TransportationCompanyID == addID).First();
+
+            if (addTransportationCompany != null)
+            {
+                Console.WriteLine("Sorry,but that ID alredy used!");
+            }
+            else
+            {
+                Console.WriteLine("Success :D");
+            }
+
+        }
 
         private void LoadData()
         {
             AutobusType autobusType1 = new AutobusType { AutobusID = 28771, TypeName = "Jednospartni" };
             AutobusType autobusType2 = new AutobusType { AutobusID = 62825, TypeName = "Mini bus" };
 
-            Autobus autobus1 = new Autobus { AutobusRegNumber = 382729172,AutobusType = autobusType1};
-            Autobus autobus2 = new Autobus { AutobusRegNumber = 826382667,AutobusType = autobusType2};
+            Autobus autobus1 = new Autobus { AutobusRegNumber = 382729172, AutobusType = autobusType1 };
+            Autobus autobus2 = new Autobus { AutobusRegNumber = 826382667, AutobusType = autobusType2 };
 
-            TransportationCompany tc1 = new TransportationCompany{ TransportationCompanyID = 2727, TransportationCompanyName = "Nikola Petrovic", TransportationCompanyPlace = "Kragujevac", Autobus = autobus1 };
+            TransportationCompany tc1 = new TransportationCompany { TransportationCompanyID = 2727, TransportationCompanyName = "Nikola Petrovic", TransportationCompanyPlace = "Kragujevac", Autobus = autobus1 };
             TransportationCompany tc2 = new TransportationCompany { TransportationCompanyID = 2638, TransportationCompanyName = "Petar Mitrovic", TransportationCompanyPlace = "Subotica", Autobus = autobus2 };
 
             autobusList.Add(autobus1);
@@ -153,7 +197,7 @@ namespace BusStationSystem.Services
             transportationCompanyList.Add(tc2);
         }
 
-        public void WriteAllAutobuses()
+        private void WriteAllAutobuses()
         {
             foreach (Autobus autobus in autobusList)
             {
@@ -161,5 +205,11 @@ namespace BusStationSystem.Services
             }
         }
 
+        private enum TipAutobusa
+        {
+            jednospratni = 1,
+            dvospratni = 2,
+            minibus = 3
+        }
     }
 }

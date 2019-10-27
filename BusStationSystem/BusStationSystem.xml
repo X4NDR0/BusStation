@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BusStationSystem</name>
+    </assembly>
+    <members>
+        <member name="T:BusStationSystem.Models.Autobus">
+            <summary>
+            Representing class the autobus model
+            </summary>
+        </member>
+        <member name="M:BusStationSystem.Models.Autobus.#ctor">
+            <summary>
+            Class constructor of autobus
+            </summary>
+        </member>
+        <member name="F:BusStationSystem.Models.Autobus.AutobusType">
+            <summary>
+            Property representing the autobus type
+            </summary>
+        </member>
+        <member name="F:BusStationSystem.Models.Autobus.AutobusRegNumber">
+            <summary>
+            Property representing the autobus registration number
+            </summary>
+        </member>
+        <member name="T:BusStationSystem.Models.AutobusType">
+            <summary>
+            Represinting class the AutobusType
+            </summary>
+        </member>
+        <member name="F:BusStationSystem.Models.AutobusType.AutobusID">
+            <summary>
+            Property representing of the autobus ID
+            </summary>
+        </member>
+        <member name="F:BusStationSystem.Models.AutobusType.TypeName">
+            <summary>
+            Property representing of the autobus type name
+            </summary>
+        </member>
+        <member name="T:BusStationSystem.Models.BusStation">
+            <summary>
+            Representing class of the bus station
+            </summary>
+        </member>
+        <member name="M:BusStationSystem.Models.BusStation.#ctor">
+            <summary>
+            Constructor of the class
+            </summary>
+        </member>
+        <member name="F:BusStationSystem.Models.BusStation.Peron">
+            <summary>
+            Object representing of the peron
+            </summary>
+        </member>
+        <member name="F:BusStationSystem.Models.BusStation.Place">
+            <summary>
+            Property represeting the place
+            </summary>
+        </member>
+        <member name="F:BusStationSystem.Models.BusStation.BusStationID">
+            <summary>
+            Property represeting ID of the bus station
+            </summary>
+        </member>
+        <member name="T:BusStationSystem.Models.Peron">
+            <summary>
+            Representing class of Peron Model
+            </summary>
+        </member>
+        <member name="F:BusStationSystem.Models.Peron.PeronID">
+            <summary>
+            Property of the peron ID
+            </summary>
+        </member>
+        <member name="F:BusStationSystem.Models.Peron.Arrival">
+            <summary>
+            Property of the arrival
+            </summary>
+        </member>
+        <member name="F:BusStationSystem.Models.Peron.Departure">
+            <summary>
+            Property of the departure
+            </summary>
+        </member>
+        <member name="T:BusStationSystem.Models.TransportationCompany">
+            <summary>
+            Class for representing the carrier model
+            </summary>
+        </member>
+        <member name="M:BusStationSystem.Models.TransportationCompany.#ctor">
+            <summary>
+            Contructor of the class transportation company
+            </summary>
+        </member>
+        <member name="F:BusStationSystem.Models.TransportationCompany.Autobus">
+            <summary>
+            Property representing the autobus
+            </summary>
+        </member>
+        <member name="F:BusStationSystem.Models.TransportationCompany.TransportationCompanyID">
+            <summary>
+            Property representing the carrier unique ID
+            </summary>
+        </member>
+        <member name="F:BusStationSystem.Models.TransportationCompany.TransportationCompanyName">
+            <summary>
+            Property representing the transportation company name
+            </summary>
+        </member>
+        <member name="F:BusStationSystem.Models.TransportationCompany.TransportationCompanyPlace">
+            <summary>
+            Property representing the transportation company place
+            </summary>
+        </member>
+        <member name="T:BusStationSystem.Services.BusStationService">
+            <summary>
+            Service used to manipulate the bus station data.
+            </summary>
+        </member>
+        <member name="M:BusStationSystem.Services.BusStationService.Initialize">
+            <summary>
+            Used to run service
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BusStationSystem.Models
+﻿namespace BusStationSystem.Models
 {
     /// <summary>
     /// Representing class the autobus model

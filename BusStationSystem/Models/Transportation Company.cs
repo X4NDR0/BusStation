@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BusStationSystem.Models
+﻿namespace BusStationSystem.Models
 {
     /// <summary>
     /// Class for representing the carrier model
@@ -10,7 +6,7 @@ namespace BusStationSystem.Models
     public class TransportationCompany
     {
         /// <summary>
-        /// Contructor of the class carrier
+        /// Contructor of the class transportation company
         /// </summary>
         public TransportationCompany()
         {
@@ -28,12 +24,12 @@ namespace BusStationSystem.Models
         public int TransportationCompanyID;
 
         /// <summary>
-        /// Property representing the carrier name
+        /// Property representing the transportation company name
         /// </summary>
         public string TransportationCompanyName;
 
         /// <summary>
-        /// Property representing the carrier place
+        /// Property representing the transportation company place
         /// </summary>
         public string TransportationCompanyPlace;
     }

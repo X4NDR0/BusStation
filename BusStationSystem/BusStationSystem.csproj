@@ -3,10 +3,12 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <StartupObject>BusStationSystem.Services.Program</StartupObject>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <DocumentationFile>C:\Users\XANDRO\source\repos\BusStationSystem\BusStationSystem\BusStationSystem.xml</DocumentationFile>
   </PropertyGroup>
 
 </Project>
