@@ -1,4 +1,6 @@
-﻿namespace BusStationSystem.Models
+﻿using System.Collections.Generic;
+
+namespace BusStationSystem.Models
 {
     /// <summary>
     /// Class for representing the carrier model
@@ -10,13 +12,13 @@
         /// </summary>
         public TransportationCompany()
         {
-            Autobus = new Autobus();
+            ListOfBuses = new List<Autobus>();
         }
 
         /// <summary>
         /// Property representing the autobus
         /// </summary>
-        public Autobus Autobus;
+        public List<Autobus> ListOfBuses;
 
         /// <summary>
         /// Property representing the carrier unique ID
@@ -31,6 +33,6 @@
         /// <summary>
         /// Property representing the transportation company place
         /// </summary>
-        public string TransportationCompanyPlace;
+        public string TransportationCompanyLocation;
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace BusStationSystem.Models
+﻿using System;
+
+namespace BusStationSystem.Models
 {
     /// <summary>
     /// Representing class of Peron Model
@@ -13,11 +15,6 @@
         /// <summary>
         /// Property of the arrival
         /// </summary>
-        public string Arrival;
-
-        /// <summary>
-        /// Property of the departure
-        /// </summary>
-        public string Departure;
+        public DateTime ArrivalDeparture;
     }
 }

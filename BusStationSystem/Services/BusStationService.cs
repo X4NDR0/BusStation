@@ -28,7 +28,7 @@ namespace BusStationSystem.Services
 
                 switch (options)
                 {
-                    case Menu.carrierMenu:
+                    case Menu.Menu:
                         Console.Clear();
                         MenuCarrier();
                         break;
@@ -95,7 +95,7 @@ namespace BusStationSystem.Services
         {
             foreach (TransportationCompany transportationCompany in transportationCompanyList)
             {
-                Console.WriteLine(transportationCompany.TransportationCompanyID + " " + transportationCompany.TransportationCompanyName + " " + transportationCompany.TransportationCompanyPlace + "\nAutobus Registration Number:" + transportationCompany.Autobus.AutobusRegNumber + "\nAutobus Type:" + transportationCompany.Autobus.AutobusType.TypeName + "\n");
+                Console.WriteLine(transportationCompany.TransportationCompanyID + " " + transportationCompany.TransportationCompanyName + " " + transportationCompany.TransportationCompanyLocation + "\nAutobus Registration Number:" + transportationCompany.ListOfBuses.AutobusRegNumber + "\nAutobus Type:" + transportationCompany.ListOfBuses.AutobusType.TypeName + "\n");
             }
         }
 
@@ -134,7 +134,7 @@ namespace BusStationSystem.Services
                 }
                 AutobusType autobusTypeEdit = new AutobusType { AutobusID = autobusID, TypeName = tipa.ToString() };
                 Autobus autobusEdit = new Autobus { AutobusRegNumber = autobusID, AutobusType = autobusTypeEdit };
-                TransportationCompany transportationCompanyEdit = new TransportationCompany { TransportationCompanyID = newID, TransportationCompanyName = newName, Autobus = autobusEdit, TransportationCompanyPlace = newPlace };
+                TransportationCompany transportationCompanyEdit = new TransportationCompany { TransportationCompanyID = newID, TransportationCompanyName = newName, ListOfBuses = autobusEdit, TransportationCompanyLocation = newPlace };
                 int indexFindedTC = transportationCompanyList.IndexOf(CheckID);
                 transportationCompanyList[indexFindedTC] = transportationCompanyEdit;
             }
@@ -147,7 +147,7 @@ namespace BusStationSystem.Services
         private void RemoveTransportaionCompany()
         {
             Console.Write("Enter the ID of the TC you want to delete:");
-            Int32.TryParse(Console.ReadLine(),out int deleteID);
+            Int32.TryParse(Console.ReadLine(), out int deleteID);
 
             TransportationCompany DeleteID = transportationCompanyList.Where(x => x.TransportationCompanyID == deleteID).First();
 
@@ -155,7 +155,8 @@ namespace BusStationSystem.Services
             {
                 transportationCompanyList.Remove(DeleteID);
                 Console.WriteLine("You successfully deleted transportation company");
-            }else
+            }
+            else
             {
                 Console.WriteLine("That ID does not exits!");
             }
@@ -164,7 +165,7 @@ namespace BusStationSystem.Services
         private void AddTransportaionCompany()
         {
             Console.Write("Enter a new ID:");
-            Int32.TryParse(Console.ReadLine(),out int addID);
+            Int32.TryParse(Console.ReadLine(), out int addID);
 
             TransportationCompany addTransportationCompany = transportationCompanyList.Where(x => x.TransportationCompanyID == addID).First();
 
@@ -187,8 +188,8 @@ namespace BusStationSystem.Services
             Autobus autobus1 = new Autobus { AutobusRegNumber = 382729172, AutobusType = autobusType1 };
             Autobus autobus2 = new Autobus { AutobusRegNumber = 826382667, AutobusType = autobusType2 };
 
-            TransportationCompany tc1 = new TransportationCompany { TransportationCompanyID = 2727, TransportationCompanyName = "Nikola Petrovic", TransportationCompanyPlace = "Kragujevac", Autobus = autobus1 };
-            TransportationCompany tc2 = new TransportationCompany { TransportationCompanyID = 2638, TransportationCompanyName = "Petar Mitrovic", TransportationCompanyPlace = "Subotica", Autobus = autobus2 };
+            TransportationCompany tc1 = new TransportationCompany { TransportationCompanyID = 2727, TransportationCompanyName = "Nikola Petrovic", TransportationCompanyLocation = "Kragujevac", ListOfBuses = autobus1 };
+            TransportationCompany tc2 = new TransportationCompany { TransportationCompanyID = 2638, TransportationCompanyName = "Petar Mitrovic", TransportationCompanyLocation = "Subotica", ListOfBuses = autobus2 };
 
             autobusList.Add(autobus1);
             autobusList.Add(autobus2);
@@ -203,13 +204,6 @@ namespace BusStationSystem.Services
             {
                 Console.WriteLine(autobus.AutobusRegNumber + " " + autobus.AutobusType.TypeName);
             }
-        }
-
-        private enum TipAutobusa
-        {
-            jednospratni = 1,
-            dvospratni = 2,
-            minibus = 3
         }
     }
 }
