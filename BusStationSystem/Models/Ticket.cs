@@ -15,6 +15,7 @@ namespace BusStationSystem.Models
         public Ticket()
         {
             TransportationCompany = new TransportationCompany();
+            Autobus = new Autobus();
             BusStationStarting = new BusStation();
             BusStationArrival = new BusStation();
         }
@@ -28,6 +29,11 @@ namespace BusStationSystem.Models
         /// ????
         /// </summary>
         public TransportationCompany TransportationCompany;
+
+        /// <summary>
+        /// ????????
+        /// </summary>
+        public Autobus Autobus;
 
         /// <summary>
         /// ??????
