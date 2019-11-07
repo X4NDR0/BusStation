@@ -419,7 +419,8 @@ namespace BusStationSystem.Services
                     Console.WriteLine("2.Dvospratni");
                     Console.WriteLine("3.Mini Bus");
                     Console.Write("Select:");
-                } while(Enum.TryParse(Console.ReadLine(), out AutobusType) == false);
+                    Enum.TryParse(Console.ReadLine(), out AutobusType);
+                } while (Enum.IsDefined(typeof(TipAutobusa), AutobusType) == false);
 
                 Autobus addAutobus = new Autobus { AutobusRegNumber = newRegNum, AutobusType = AutobusType };
 
