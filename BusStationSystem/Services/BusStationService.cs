@@ -367,9 +367,9 @@ namespace BusStationSystem.Services
                 Console.Write("Select:");
                 TipAutobusa AutobusType;
 
-                Enum.TryParse(Console.ReadLine(),out AutobusType);
+                Enum.TryParse(Console.ReadLine(), out AutobusType);
 
-                Autobus editAutobus = new Autobus { AutobusRegNumber = newRegNum, AutobusType = AutobusType};
+                Autobus editAutobus = new Autobus { AutobusRegNumber = newRegNum, AutobusType = AutobusType };
 
                 int indexAutobus = autobusList.IndexOf(CheckID);
                 autobusList[indexAutobus] = editAutobus;
@@ -401,25 +401,27 @@ namespace BusStationSystem.Services
         private void AddAutobus()
         {
             Console.Write("Enter registration number:");
-            Int32.TryParse(Console.ReadLine(),out int newRegNum);
+            Int32.TryParse(Console.ReadLine(), out int newRegNum);
 
             Autobus CheckID = autobusList.Where(x => x.AutobusRegNumber == newRegNum).FirstOrDefault();
 
             if (CheckID != null)
             {
-                Console.WriteLine("Autobus with that registration number does not exits!");
+                Console.WriteLine("Autobus with that registration number already exits!");
             }
             else
             {
                 TipAutobusa AutobusType;
-                Console.Write("Select autobus type:");
-                Console.WriteLine("1.Jednospratni");
-                Console.WriteLine("2.Dvospratni");
-                Console.WriteLine("3.Mini Bus");
-                Console.Write("Select:");
-                Enum.TryParse(Console.ReadLine(), out AutobusType);
+                do
+                {
+                    Console.Write("Select autobus type:\n");
+                    Console.WriteLine("1.Jednospratni");
+                    Console.WriteLine("2.Dvospratni");
+                    Console.WriteLine("3.Mini Bus");
+                    Console.Write("Select:");
+                } while(Enum.TryParse(Console.ReadLine(), out AutobusType) == false);
 
-                Autobus addAutobus = new Autobus { AutobusRegNumber = newRegNum,AutobusType = AutobusType};
+                Autobus addAutobus = new Autobus { AutobusRegNumber = newRegNum, AutobusType = AutobusType };
 
                 autobusList.Add(addAutobus);
             }
@@ -433,7 +435,7 @@ namespace BusStationSystem.Services
             Console.WriteLine("3.Remove bus station");
             Console.WriteLine("4.Add bus station");
             Console.Write("Unos:");
-            Int32.TryParse(Console.ReadLine(),out int select);
+            Int32.TryParse(Console.ReadLine(), out int select);
 
             switch (select)
             {
@@ -445,7 +447,10 @@ namespace BusStationSystem.Services
 
         private void WriteAllBusStation()
         {
-          
+            foreach (BusStation busStation in busStationList)
+            {
+                Console.WriteLine(busStation.BusStationID + " " + busStation.Location + " " + busStation.Peron.PeronID + " " + busStation.Peron.ArrivalDeparture);
+            }
         }
 
         private void LoadData()
@@ -460,6 +465,9 @@ namespace BusStationSystem.Services
             Peron peron1 = new Peron { PeronID = 242, ArrivalDeparture = new DateTime(2019, 4, 4, 6, 30, 00) };
             Peron peron2 = new Peron { PeronID = 532, ArrivalDeparture = new DateTime(2019, 3, 3, 9, 30, 00) };
 
+            BusStation busStation1 = new BusStation { BusStationID = 5832, Location = "Beograd", Peron = peron1 };
+            BusStation busStation2 = new BusStation { BusStationID = 9281, Location = "Smederevo", Peron = peron2 };
+
             autobusList.Add(autobus1);
             autobusList.Add(autobus2);
 
@@ -468,6 +476,9 @@ namespace BusStationSystem.Services
 
             peronList.Add(peron1);
             peronList.Add(peron2);
+
+            busStationList.Add(busStation1);
+            busStationList.Add(busStation2);
         }
     }
 }
