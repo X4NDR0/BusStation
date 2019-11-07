@@ -1,23 +1,23 @@
 ﻿namespace BusStationSystem.Enums
 {
     /// <summary>
-    /// ???????????????
+    /// Representing enum TipAutobusa
     /// </summary>
     public enum TipAutobusa
     {
         /// <summary>
-        /// ???????????????
+        /// Enum values representing types of a bus.
         /// </summary>
-        jednospratni = 1,
+        Jednospratni = 1,
 
         /// <summary>
-        /// ???????????????
+        /// Enum values representing types of a bus.
         /// </summary>
-        dvospratni = 2,
+        Dvospratni = 2,
 
         /// <summary>
-        /// ???????????????
+        /// Enum values representing types of a bus.
         /// </summary>
-        minibus = 3
+        MiniBus = 3
     }
 }
