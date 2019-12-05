@@ -15,6 +15,7 @@ namespace BusStationSystem.Services
         private static List<Autobus> autobusList = new List<Autobus>();
         private static List<Peron> peronList = new List<Peron>();
         private static List<BusStation> busStationList = new List<BusStation>();
+        private static List<Ticket> ticketList = new List<Ticket>();
         Menu options;
 
         /// <summary>
@@ -50,6 +51,11 @@ namespace BusStationSystem.Services
                         BusStationMenu();
                         break;
 
+                    case Menu.TicketMenu:
+                        Console.Clear();
+                        TicketMenu();
+                        break;
+
                     case Menu.exit:
                         Environment.Exit(0);
                         break;
@@ -67,6 +73,7 @@ namespace BusStationSystem.Services
             Console.WriteLine("2.Peron menu");
             Console.WriteLine("3.Autobus menu");
             Console.WriteLine("4.Bus Station menu");
+            Console.WriteLine("5.Ticket menu");
             Console.WriteLine("0.Exit");
             Console.Write("Unos:");
         }
@@ -576,6 +583,130 @@ namespace BusStationSystem.Services
             }
         }
 
+        //Ticket
+
+        private void TicketMenu()
+        {
+            Console.WriteLine("1.Write all tickets");
+            Console.WriteLine("2.Edit ticket");
+            Console.WriteLine("3.Remove ticket");
+            Console.WriteLine("4.Add ticket");
+            Console.Write("Option:");
+            Int32.TryParse(Console.ReadLine(),out int option);
+
+            switch (option)
+            {
+                case 1:
+                    Console.Clear();
+                    WriteAllTickets();
+                    break;
+
+                case 2:
+                    Console.Clear();
+                    EditTicket();
+                    break;
+
+                default:
+                    Console.WriteLine("That option does not exits!");
+                    break;
+            }
+        }
+
+        private void WriteAllTickets()
+        {
+            foreach (Ticket ticket in ticketList)
+            {
+                Console.WriteLine(ticket.TicketId + " " + ticket.Autobus.AutobusType + " " + ticket.TransportationCompany.TransportationCompanyName + " Starting:" + ticket.BusStationStarting.Location + " Arrival:" + ticket.BusStationArrival.Location);
+            }
+        }
+         
+        private void EditTicket()
+        {
+            //Objects for edit
+            TransportationCompany tcEdit;
+            Autobus abEdit;
+            BusStation bsStart;
+            BusStation bsArrival;
+
+            Console.Write("Enter ticket ID:");
+            Int32.TryParse(Console.ReadLine(),out int editID);
+
+            Ticket CheckID = ticketList.Where(x => x.TicketId == editID).FirstOrDefault();
+
+            if (CheckID != null)
+            {
+                Console.Write("Enter a new ticket ID:");
+                Int32.TryParse(Console.ReadLine(),out int newID);
+
+                WriteAllTransportaionCompany();
+                Console.Write("Enter TC id:");
+                Int32.TryParse(Console.ReadLine(),out int newTcID);
+
+                TransportationCompany tcCheck = transportationCompanyList.Where(x => x.TransportationCompanyID == newTcID).FirstOrDefault();
+
+                if (tcCheck != null)
+                {
+                    tcEdit = tcCheck;
+
+                    WriteAllAutobuses();
+                    Console.Write("Enter autobus reg number:");
+                    Int32.TryParse(Console.ReadLine(),out int regNumEdit);
+
+                    Autobus abCheck = autobusList.Where(x => x.AutobusRegNumber == regNumEdit).FirstOrDefault();
+
+                    if (abCheck != null)
+                    {
+                        abEdit = abCheck;
+
+                        WriteAllBusStation();
+                        Console.Write("Enter id of starting station:");
+                        Int32.TryParse(Console.ReadLine(),out int startStation);
+
+                        BusStation startBS = busStationList.Where(c => c.BusStationID == startStation).FirstOrDefault();
+
+                        if (startBS != null)
+                        {
+                            bsStart = startBS;
+
+                            Console.Write("Enter id of arrival station:");
+                            Int32.TryParse(Console.ReadLine(),out int arrivalStation);
+
+                            BusStation arrivalBS = busStationList.Where(b => b.BusStationID == arrivalStation).FirstOrDefault();
+
+                            if (arrivalBS != null)
+                            {
+                                bsArrival = arrivalBS;
+
+                                Ticket editTicket = new Ticket {TicketId = newID,TransportationCompany = tcEdit,Autobus = abEdit,BusStationStarting = bsStart,BusStationArrival = bsArrival};
+                                int objectIndex = ticketList.IndexOf(CheckID);
+                                ticketList[objectIndex] = editTicket;
+                            }else
+                            {
+                                Console.WriteLine("That ID does not exits!");
+                            }
+
+                        }else
+                        {
+                            Console.WriteLine("That ID does not exits!");
+                        }
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("That ID does not exits!");
+                    }
+                }else
+                {
+                    Console.WriteLine("That ID does not exits!");
+                }
+
+            }else
+            {
+                Console.WriteLine("That ID does not exits!");
+            }
+
+        }
+
         private void LoadData()
         {
 
@@ -591,6 +722,9 @@ namespace BusStationSystem.Services
             BusStation busStation1 = new BusStation { BusStationID = 5832, Location = "Beograd", Peron = peron1 };
             BusStation busStation2 = new BusStation { BusStationID = 9281, Location = "Smederevo", Peron = peron2 };
 
+            Ticket ticket1 = new Ticket {TicketId = 4334,TransportationCompany = tc1,Autobus = autobus1,BusStationArrival = busStation1,BusStationStarting = busStation2};
+            Ticket ticket2 = new Ticket {TicketId = 5555,TransportationCompany = tc2,Autobus = autobus2,BusStationArrival = busStation2,BusStationStarting = busStation1};
+
             autobusList.Add(autobus1);
             autobusList.Add(autobus2);
 
@@ -602,6 +736,9 @@ namespace BusStationSystem.Services
 
             busStationList.Add(busStation1);
             busStationList.Add(busStation2);
+
+            ticketList.Add(ticket1);
+            ticketList.Add(ticket2);
         }
     }
 }
