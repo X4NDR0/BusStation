@@ -631,7 +631,7 @@ namespace BusStationSystem.Services
         {
             foreach (Ticket ticket in ticketList)
             {
-                Console.WriteLine(ticket.TicketId + " " + ticket.Autobus.AutobusType + " " + ticket.TransportationCompany.TransportationCompanyName + " Starting:" + ticket.BusStationStarting.Location + " Arrival:" + ticket.BusStationArrival.Location);
+                Console.WriteLine(ticket.TicketId + " " + ticket.Autobus.AutobusType + " " + ticket.TransportationCompany.TransportationCompanyName + " Starting:" + ticket.BusStationStarting.Location + " Starting Time:" + ticket.BusStationStarting.Peron.ArrivalDeparture + " Arrival:" + ticket.BusStationArrival.Location + " Arrival Time:" + ticket.BusStationArrival.Peron.ArrivalDeparture);
             }
         }
 
@@ -822,8 +822,8 @@ namespace BusStationSystem.Services
             TransportationCompany tc1 = new TransportationCompany { TransportationCompanyID = 2727, TransportationCompanyName = "Lasta", TransportationCompanyLocation = "Kragujevac" };
             TransportationCompany tc2 = new TransportationCompany { TransportationCompanyID = 2638, TransportationCompanyName = "Janjusevic", TransportationCompanyLocation = "Subotica" };
 
-            Peron peron1 = new Peron { PeronID = 242, ArrivalDeparture = new DateTime(2019, 4, 4, 6, 30, 00) };
-            Peron peron2 = new Peron { PeronID = 532, ArrivalDeparture = new DateTime(2019, 3, 3, 9, 30, 00) };
+            Peron peron1 = new Peron { PeronID = 242, ArrivalDeparture = new DateTime(2019, 4, 27, 6, 30, 00) };
+            Peron peron2 = new Peron { PeronID = 532, ArrivalDeparture = new DateTime(2019, 3, 30, 9, 30, 00) };
 
             BusStation busStation1 = new BusStation { BusStationID = 5832, Location = "Beograd", Peron = peron1 };
             BusStation busStation2 = new BusStation { BusStationID = 9281, Location = "Smederevo", Peron = peron2 };
