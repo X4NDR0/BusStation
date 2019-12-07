@@ -611,6 +611,16 @@ namespace BusStationSystem.Services
                     EditTicket();
                     break;
 
+                case 3:
+                    Console.Clear();
+                    RemoveTicket();
+                    break;
+
+                case 4:
+                    Console.Clear();
+                    AddTicket();
+                    break;
+
                 default:
                     Console.WriteLine("That option does not exits!");
                     break;
@@ -625,92 +635,6 @@ namespace BusStationSystem.Services
             }
         }
 
-        //private void EditTicket()
-        //{
-        //    //Objects for edit
-        //    TransportationCompany tcEdit;
-        //    Autobus abEdit;
-        //    BusStation bsStart;
-        //    BusStation bsArrival;
-
-        //    Console.Write("Enter ticket ID:");
-        //    Int32.TryParse(Console.ReadLine(),out int editID);
-
-        //    Ticket CheckID = ticketList.Where(x => x.TicketId == editID).FirstOrDefault();
-
-        //    if (CheckID != null)
-        //    {
-        //        Console.Write("Enter a new ticket ID:");
-        //        Int32.TryParse(Console.ReadLine(),out int newID);
-
-        //        WriteAllTransportaionCompany();
-        //        Console.Write("Enter TC id:");
-        //        Int32.TryParse(Console.ReadLine(),out int newTcID);
-
-        //        TransportationCompany tcCheck = transportationCompanyList.Where(x => x.TransportationCompanyID == newTcID).FirstOrDefault();
-
-        //        if (tcCheck != null)
-        //        {
-        //            tcEdit = tcCheck;
-
-        //            WriteAllAutobuses();
-        //            Console.Write("Enter autobus reg number:");
-        //            Int32.TryParse(Console.ReadLine(),out int regNumEdit);
-
-        //            Autobus abCheck = autobusList.Where(x => x.AutobusRegNumber == regNumEdit).FirstOrDefault();
-
-        //            if (abCheck != null)
-        //            {
-        //                abEdit = abCheck;
-
-        //                WriteAllBusStation();
-        //                Console.Write("Enter id of starting station:");
-        //                Int32.TryParse(Console.ReadLine(),out int startStation);
-
-        //                BusStation startBS = busStationList.Where(c => c.BusStationID == startStation).FirstOrDefault();
-
-        //                if (startBS != null)
-        //                {
-        //                    bsStart = startBS;
-
-        //                    Console.Write("Enter id of arrival station:");
-        //                    Int32.TryParse(Console.ReadLine(),out int arrivalStation);
-
-        //                    BusStation arrivalBS = busStationList.Where(b => b.BusStationID == arrivalStation).FirstOrDefault();
-
-        //                    if (arrivalBS != null)
-        //                    {
-        //                        bsArrival = arrivalBS;
-
-        //                        Ticket editTicket = new Ticket {TicketId = newID,TransportationCompany = tcEdit,Autobus = abEdit,BusStationStarting = bsStart,BusStationArrival = bsArrival};
-        //                        int objectIndex = ticketList.IndexOf(CheckID);
-        //                        ticketList[objectIndex] = editTicket;
-        //                    }else
-        //                    {
-        //                        Console.WriteLine("That ID does not exits!");
-        //                    }
-
-        //                }else
-        //                {
-        //                    Console.WriteLine("That ID does not exits!");
-        //                }
-
-        //            }
-        //            else
-        //            {
-        //                Console.WriteLine("That ID does not exits!");
-        //            }
-        //        }else
-        //        {
-        //            Console.WriteLine("That ID does not exits!");
-        //        }
-
-        //    }else
-        //    {
-        //        Console.WriteLine("That ID does not exits!");
-        //    }
-
-        //}
 
         private void EditTicket()
         {
@@ -794,14 +718,109 @@ namespace BusStationSystem.Services
             ticketList[objectIndex] = editTicket;
         }
 
+        private void RemoveTicket()
+        {
+            Console.Write("Enter ID:");
+            Int32.TryParse(Console.ReadLine(),out int removeID);
+
+            Ticket CheckAndRemove = ticketList.Where(x => x.TicketId == removeID).FirstOrDefault();
+
+            if (CheckAndRemove != null)
+            {
+                ticketList.Remove(CheckAndRemove);
+                Console.WriteLine("Successfully deleted!");
+            }else
+            {
+                Console.WriteLine("Sorry,but that ID does not exits!");
+            }
+        }
+
+        private void AddTicket()
+        {
+            //Object
+            TransportationCompany newTC;
+            Autobus newAutobus;
+            BusStation newStart;
+            BusStation newArrival;
+
+            Console.Write("Enter a new ticket ID:");
+            Int32.TryParse(Console.ReadLine(), out int newID);
+
+            Ticket CheckID = ticketList.Where(j => j.TicketId == newID).FirstOrDefault();
+
+            if (CheckID != null)
+            {
+                Console.WriteLine("Sorry,that ID is aleardy exits!");
+                return;
+            }
+
+            WriteAllTransportaionCompany();
+            Console.Write("Enter TC id:");
+            Int32.TryParse(Console.ReadLine(),out int TCid);
+
+            TransportationCompany CheckTCID = transportationCompanyList.Where(x => x.TransportationCompanyID == TCid).FirstOrDefault();
+
+            if (CheckTCID == null)
+            {
+                Console.WriteLine("Sorry,that ID is aleardy exits!");
+                return;
+            }
+
+            newTC = CheckTCID;
+
+            WriteAllAutobuses();
+            Console.Write("Enter autobus ID:");
+            Int32.TryParse(Console.ReadLine(),out int abID);
+
+            Autobus CheckAubID = autobusList.Where(x => x.AutobusRegNumber == abID).FirstOrDefault();
+
+            if (CheckAubID == null)
+            {
+                Console.WriteLine("Sorry,that ID is aleardy exits!");
+                return;
+            }
+
+            newAutobus = CheckAubID;
+
+            WriteAllBusStation();
+            Console.Write("Enter bus station id for starting location:");
+            Int32.TryParse(Console.ReadLine(),out int newIDStart);
+
+            BusStation Start = busStationList.Where(x => x.BusStationID == newIDStart).FirstOrDefault();
+
+            if (Start == null)
+            {
+                Console.WriteLine("Sorry,that ID is aleardy exits!");
+                return;
+            }
+
+            newStart = Start;
+
+            Console.Write("Enter bus station id for arrival location:");
+            Int32.TryParse(Console.ReadLine(),out int newIDArrival);
+
+            BusStation Arrival = busStationList.Where(x => x.BusStationID == newIDArrival).FirstOrDefault();
+
+            if (Arrival == null)
+            {
+                Console.WriteLine("Sorry,that ID is aleardy exits!");
+                return;
+            }
+
+            newArrival = Arrival;
+
+            Ticket newTicket = new Ticket {TicketId = newID,Autobus = newAutobus,TransportationCompany = newTC,BusStationStarting = newStart,BusStationArrival = newArrival};
+            ticketList.Add(newTicket);
+        }
+
         private void LoadData()
         {
 
             Autobus autobus1 = new Autobus { AutobusType = TipAutobusa.MiniBus, AutobusRegNumber = 382729172 };
             Autobus autobus2 = new Autobus { AutobusType = TipAutobusa.Jednospratni, AutobusRegNumber = 55667788 };
 
-            TransportationCompany tc1 = new TransportationCompany { TransportationCompanyID = 2727, TransportationCompanyName = "Nikola Petrovic", TransportationCompanyLocation = "Kragujevac" };
-            TransportationCompany tc2 = new TransportationCompany { TransportationCompanyID = 2638, TransportationCompanyName = "Petar Mitrovic", TransportationCompanyLocation = "Subotica" };
+            TransportationCompany tc1 = new TransportationCompany { TransportationCompanyID = 2727, TransportationCompanyName = "Lasta", TransportationCompanyLocation = "Kragujevac" };
+            TransportationCompany tc2 = new TransportationCompany { TransportationCompanyID = 2638, TransportationCompanyName = "Janjusevic", TransportationCompanyLocation = "Subotica" };
 
             Peron peron1 = new Peron { PeronID = 242, ArrivalDeparture = new DateTime(2019, 4, 4, 6, 30, 00) };
             Peron peron2 = new Peron { PeronID = 532, ArrivalDeparture = new DateTime(2019, 3, 3, 9, 30, 00) };
