@@ -2,6 +2,7 @@
 using BusStationSystem.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace BusStationSystem.Services
@@ -631,7 +632,7 @@ namespace BusStationSystem.Services
         {
             foreach (Ticket ticket in ticketList)
             {
-                Console.WriteLine(ticket.TicketId + " " + ticket.Autobus.AutobusType + " " + ticket.TransportationCompany.TransportationCompanyName + " Starting:" + ticket.BusStationStarting.Location + " Starting Time:" + ticket.BusStationStarting.Peron.ArrivalDeparture + " Arrival:" + ticket.BusStationArrival.Location + " Arrival Time:" + ticket.BusStationArrival.Peron.ArrivalDeparture);
+                Console.WriteLine(ticket.TicketId + " " + ticket.Autobus.AutobusType + " " + ticket.TransportationCompany.TransportationCompanyName + " Starting:" + ticket.BusStationStarting.Location + " Starting Time:" + ticket.BusStationStarting.Peron.ArrivalDeparture.ToString(CultureInfo.CreateSpecificCulture("sr-SR")) + " Arrival:" + ticket.BusStationArrival.Location + " Arrival Time:" + ticket.BusStationArrival.Peron.ArrivalDeparture.ToString(CultureInfo.CreateSpecificCulture("sr-SR")));
             }
         }
 
