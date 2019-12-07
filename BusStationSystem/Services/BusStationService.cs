@@ -781,7 +781,7 @@ namespace BusStationSystem.Services
 
             BusStation arrivalBS = busStationList.Where(b => b.BusStationID == arrivalStation).FirstOrDefault();
 
-            if (arrivalBS != null)
+            if (arrivalBS == null)
             {
                 Console.WriteLine("That ID does not exits!");
                 return;
