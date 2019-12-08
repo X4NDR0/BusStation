@@ -32,5 +32,19 @@ namespace BusStationSystem.Utilies
             return input;
         }
 
+        /// <summary>
+        /// Method representing date time input for date time
+        /// </summary>
+        public static DateTime CheckDateTimeInput()
+        {
+            DateTime dt = new DateTime();
+
+            while (DateTime.TryParse(Console.ReadLine(),out dt) == false)
+            {
+                Console.Write("Sorry,wrong input format try again:");
+            }
+            return dt;
+        }
+
     }
 }

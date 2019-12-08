@@ -80,7 +80,7 @@ namespace BusStationSystem.Services
             Console.Write("Unos:");
         }
 
-        private void MenuTextCarrier()
+        private void MenuTextTc()
         {
             Console.WriteLine("1.Write all TC");
             Console.WriteLine("2.Edit TC");
@@ -91,7 +91,7 @@ namespace BusStationSystem.Services
 
         private void MenuTC()
         {
-            MenuTextCarrier();
+            MenuTextTc();
             int id = Helper.CheckIntInput();
 
             switch (id)
@@ -309,7 +309,7 @@ namespace BusStationSystem.Services
             int newID = Helper.CheckIntInput();
 
             Console.Write("Enter date and time(2019/5/20 5:30:00):");
-            DateTime newTime = DateTime.Parse(Console.ReadLine());
+            DateTime newTime = Helper.CheckDateTimeInput();
 
             Peron addPeron = new Peron { PeronID = newID, ArrivalDeparture = newTime };
             peronList.Add(addPeron);
