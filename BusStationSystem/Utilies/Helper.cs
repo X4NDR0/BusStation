@@ -8,7 +8,7 @@ namespace BusStationSystem.Utilies
     public static class Helper
     {
         /// <summary>
-        /// Method representing checking input for numbers
+        /// Method that checks for int validaty
         /// </summary>
         public static int CheckIntInput()
         {
@@ -20,7 +20,7 @@ namespace BusStationSystem.Utilies
             return number;
         }
         /// <summary>
-        /// Method representing string input for string
+        /// Method that checks for string validity
         /// </summary>
         public static string CheckStringInput()
         {
@@ -33,7 +33,7 @@ namespace BusStationSystem.Utilies
         }
 
         /// <summary>
-        /// Method representing date time input for date time
+        /// Method that checks for date time validity
         /// </summary>
         public static DateTime CheckDateTimeInput()
         {
